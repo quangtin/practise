@@ -7,10 +7,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@Document("product")
-@TypeAlias("ProductFund")
+//@Document("product")
+//@TypeAlias("ProductFund")
 @FieldNameConstants
 public class ProductEntity extends BaseEntity {
+  private String id;
+  private String name;
+  private String description;
 }
