@@ -1,4 +1,4 @@
-package com.pm.tin.video;
+package com.pm.tin.product.video;
 
 record VideoRequest(String data) {
 }

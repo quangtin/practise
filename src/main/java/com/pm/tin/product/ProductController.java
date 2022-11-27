@@ -1,6 +1,6 @@
 package com.pm.tin.product;
 
-import com.pm.tin.entity.ProductEntity;
+import com.pm.tin.entity.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ class ProductController {
 
     @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<ProductDto> createProduct(@RequestBody ProductReq req) {
-        ProductEntity pe = service.create(req);
+        Product pe = service.create(req);
         return ResponseEntity.ok(mapper.toPDto(pe));
     }
 }

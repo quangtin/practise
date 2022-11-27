@@ -1,11 +1,16 @@
 spring:
   application:
     name: product-management
-org:
-  springframework:
-    boot:
-      logging:
-        LoggingSystem: none
+  data:
+    mongodb:
+      uri: mongodb://dev:dev@localhost:27017/ProductManagement
+      database: ProductManagement
+#      uuid-representation: standard
+#org:
+#  springframework:
+#    boot:
+#      logging:
+#        LoggingSystem: none
 #logging:
 #  LoggingSystem: none
 #  level:

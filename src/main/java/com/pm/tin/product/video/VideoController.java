@@ -1,4 +1,4 @@
-package com.pm.tin.video;
+package com.pm.tin.product.video;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +11,6 @@ public class VideoController {
 
     @PostMapping(value = "/uploads")
     ResponseEntity<Void> upLoadVideo(VideoRequest req) {
-
         return ResponseEntity.ok(null);
     }
 }
