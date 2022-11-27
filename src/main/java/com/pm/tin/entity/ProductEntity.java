@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 @AllArgsConstructor
+@Builder
 //@Document("product")
 //@TypeAlias("ProductFund")
 @FieldNameConstants

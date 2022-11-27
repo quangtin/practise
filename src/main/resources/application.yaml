@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: product-management
+org:
+  springframework:
+    boot:
+      logging:
+        LoggingSystem: none
+#logging:
+#  LoggingSystem: none
+#  level:
+#    root: INFO
+#    org.hibernate.SQL: INFO
+#  config: logback-spring.xml
+
+server:
+  port: 8100
+

@@ -33,5 +33,7 @@
     Rest Api: 
         - https://stackoverflow.com/questions/55789337/best-practice-to-send-response-in-spring-boot
         - https://www.javaguides.net/2018/06/restful-api-design-best-practices.html
+        - https://spring.io/guides/tutorials/rest/
     Mongo db: https://www.baeldung.com/spring-data-mongodb-tutorial
+
 
