@@ -1,17 +1,14 @@
 package com.pm.tin.util.exception;
 
-import com.pm.tin.util.MessageUtil;
 import lombok.Getter;
-import org.apache.commons.lang3.StringUtils;
 
 @Getter
 public class PMRuntimeException extends RuntimeException {
-    private ErrorDto errorDto;
-
+    private ExceptionDto data;
 
     public PMRuntimeException(String key, Object... params) {
-        this(StringUtils.joinWith(":", key, MessageUtil.getMessage(key, params)));
-        this.errorDto = new ErrorDto(key, getMessage(), params);
+        this(key);
+        this.data = new ExceptionDto(key, params);
     }
 
     private PMRuntimeException(String msg) {
@@ -21,4 +18,9 @@ public class PMRuntimeException extends RuntimeException {
     public PMRuntimeException(String msg, Throwable ex) {
         super(msg, ex);
     }
+
+    public record ExceptionDto(String code, Object... params) {
+    }
+
+    ;
 }
