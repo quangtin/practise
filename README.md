@@ -40,6 +40,9 @@
         - config:
             + https://www.baeldung.com/spring-data-mongodb-connection
             + https://www.baeldung.com/spring-data-mongodb-tutorial
+    Videos:
+        - https://saravanastar.medium.com/video-streaming-over-http-using-spring-boot-51e9830a3b8
+        - http://shazsterblog.blogspot.com/2016/02/asynchronous-streaming-request.html
                 
 
 
