@@ -125,6 +125,11 @@
                 <artifactId>jakarta.validation-api</artifactId>
                 <version>3.0.2</version>
             </dependency>
+            <dependency>
+                <groupId>io.projectreactor</groupId>
+                <artifactId>reactor-core</artifactId>
+                <version>3.4.16</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -149,6 +154,12 @@
             <artifactId>lombok-mapstruct-binding</artifactId>
             <version>0.2.0</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-core</artifactId>
+            <!--            <version>3.4.16</version>-->
         </dependency>
 
         <dependency>
