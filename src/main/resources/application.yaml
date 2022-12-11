@@ -17,6 +17,13 @@ spring:
 #    root: INFO
 #    org.hibernate.SQL: INFO
 #  config: logback-spring.xml
+aws:
+  s3:
+    region: "us-southeast-1"
+    bucket-template: template-dev-finbase-storage
+      bucket-image: dev-image-finbase-storage
+      bucket-contract: contract-dev-finbase-storage
+
 
 server:
   port: 8100
