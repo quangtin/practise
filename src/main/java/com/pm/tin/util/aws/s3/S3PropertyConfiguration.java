@@ -13,5 +13,6 @@ public class S3PropertyConfiguration {
     private String region;
     private String endpoint;
     private String videoBucket;
-    
+    private Long timeoutDownload;
+    private Long timeoutUpload;
 }
