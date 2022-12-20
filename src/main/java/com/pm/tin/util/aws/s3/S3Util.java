@@ -35,10 +35,10 @@ public class S3Util {
     S3Util(S3PropertyConfiguration s3Property) {
         s3Client = getS3Client(s3Property);
         s3Presigner = getS3Presigner(s3Property);
-        defaultBucket = s3Property.getVideoBucket();
+        defaultBucket = s3Property.getBucketVideo();
         timeoutUpload = ofNullable(s3Property.getTimeoutUpload()).orElse(THIRTY_MINUTES);
         timeoutDownload = ofNullable(s3Property.getTimeoutDownload()).orElse(SIXTY_MINUTES);
-        bucketNameMap = ImmutableMap.of(VIDEO, s3Property.getVideoBucket());
+        bucketNameMap = ImmutableMap.of(VIDEO, s3Property.getBucketVideo());
     }
 
     private S3Presigner getS3Presigner(S3PropertyConfiguration s3Property) {
@@ -73,6 +73,7 @@ public class S3Util {
                 .builder()
                 .signatureDuration(Duration.ofMinutes(timeoutUpload))
                 .putObjectRequest(getObjectRequest)
+
                 .build();
         URL url = s3Presigner.presignPutObject(getObjectPresignRequest).url();
         return url.toString();

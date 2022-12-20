@@ -30,7 +30,7 @@ import static org.springframework.http.HttpStatus.PARTIAL_CONTENT;
 @RequestMapping("videos")
 @RequiredArgsConstructor
 public class VideoController {
-
+    
     public static final String READ = "r";
     private final VideoMapper mapper;
     private final S3Util s3Util;
@@ -38,19 +38,21 @@ public class VideoController {
     private final Many<Integer> sink = Sinks.many().multicast().onBackpressureBuffer(100);
     private byte[] BUFFER = new byte[1024];
     private ExecutorService nonBlockingService = Executors.newCachedThreadPool();
-
-    @PostMapping(value = "/uploads")
-    ResponseEntity<UploadUrlResult> upLoadVideo(@RequestBody VideoRequest req) {
+    
+    @GetMapping(value = "/uploads")
+    ResponseEntity<UploadUrlResult> upLoadVideo(VideoRequest req) {
         UploadUrlResult result = s3Util.uploadUrl(mapper.toURReq(req));
         return ResponseEntity.ok(result);
     }
-
-    @GetMapping(value = "/play", produces = MediaType.APPLICATION_JSON_VALUE)
+    
+    @GetMapping(
+            value = "/play",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     ResponseEntity<StreamingResponseBody> play(PlayVideoReq req) throws FileNotFoundException {
         // read file
         VideoDto response = playVideoHandler(req);
-        return ResponseEntity
-                .status(PARTIAL_CONTENT)
+        return ResponseEntity.status(PARTIAL_CONTENT)
                 .header(CONTENT_TYPE, "videos/mp4")
                 .header(ACCEPT_RANGES, "bytes")
                 .header(CONTENT_LENGTH, String.valueOf(response.getLength()))
@@ -92,7 +94,7 @@ public class VideoController {
         long end = ofNullable(req.getEnd()).filter(e -> e < f.length()).orElse(f.length());
 
         StreamingResponseBody response = (os) -> {
-            InputStream inputStream = s3Util.download(req);
+            InputStream inputStream = s3Util.download(mapper.toDR(req));
             ByteArrayOutputStream bufferedOutputStream = new ByteArrayOutputStream();
             byte[] data = new byte[1024];
             int nRead;
@@ -102,7 +104,6 @@ public class VideoController {
             bufferedOutputStream.flush();
             byte[] result = new byte[(int) (end - start)];
             System.arraycopy(bufferedOutputStream.toByteArray(), (int) start, result, 0, (int) (end - start));
-            return result;
 
         };
 

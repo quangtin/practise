@@ -19,10 +19,10 @@ spring:
 #  config: logback-spring.xml
 aws:
   s3:
-    region: "us-southeast-1"
-    bucket-template: template-dev-finbase-storage
-      bucket-image: dev-image-finbase-storage
-      bucket-contract: contract-dev-finbase-storage
+    region: ap-southeast-1
+    bucket-video: product-video-streaming
+    timeout-download: 30
+    timeout-upload: 30
 
 
 server:

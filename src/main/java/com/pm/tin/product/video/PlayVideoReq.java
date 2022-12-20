@@ -13,10 +13,5 @@ class PlayVideoReq {
     String id;
     Long start;
     Long end;
-//    Range range;
-//
-//    static class Range {
-//        Long start;
-//        Long end;
-//    }
+    String path;
 }
