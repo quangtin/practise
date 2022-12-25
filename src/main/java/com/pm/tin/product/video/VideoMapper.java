@@ -11,15 +11,12 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 interface VideoMapper {
     VideoDto toVDto(StreamingResponseBody body, long start, long end, long length);
     
-    @Mapping(
-            target = "type",
-            constant = "VIDEO"
-    )
+    @Mapping(target = "type", constant = "VIDEO")
     UploadUrlReq toURReq(VideoRequest req);
     
-    @Mapping(
-            target = "type",
-            constant = "VIDEO"
-    )
+    @Mapping(target = "type", constant = "VIDEO")
     DownloadUrlReq toDR(PlayVideoReq req);
+    
+    @Mapping(target = "type", constant = "VIDEO")
+    DownloadUrlReq toDUReq(VideoRequest req);
 }

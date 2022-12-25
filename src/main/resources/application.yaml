@@ -5,7 +5,12 @@ spring:
     mongodb:
       uri: mongodb://dev:dev@localhost:27017/ProductManagement
       database: ProductManagement
+
+  mvc:
+    async:
+      request-timeout: 3600000
 #      uuid-representation: standard
+
 #org:
 #  springframework:
 #    boot:
@@ -23,7 +28,6 @@ aws:
     bucket-video: product-video-streaming
     timeout-download: 30
     timeout-upload: 30
-
 
 server:
   port: 8100

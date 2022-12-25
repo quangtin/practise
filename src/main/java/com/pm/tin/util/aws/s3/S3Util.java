@@ -3,11 +3,13 @@ package com.pm.tin.util.aws.s3;
 import com.google.common.collect.ImmutableMap;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
+import software.amazon.awssdk.core.sync.ResponseTransformer;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.S3ClientBuilder;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.ServerSideEncryption;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignRequest;
 import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignRequest;
@@ -67,7 +69,12 @@ public class S3Util {
     }
 
     private String generateUrl(String bucketName, String path) {
-        PutObjectRequest getObjectRequest = PutObjectRequest.builder().bucket(bucketName).key(path).build();
+        PutObjectRequest getObjectRequest = PutObjectRequest
+                .builder()
+                .serverSideEncryption(ServerSideEncryption.AES256)
+                .bucket(bucketName)
+                .key(path)
+                .build();
 
         PutObjectPresignRequest getObjectPresignRequest = PutObjectPresignRequest
                 .builder()
@@ -92,11 +99,18 @@ public class S3Util {
         URL url = s3Presigner.presignGetObject(getObjectPresignRequest).url();
         return url.toString();
     }
-
+    
     public InputStream download(DownloadUrlReq req) {
         String bucketName = bucketNameMap.getOrDefault(req.getType(), defaultBucket);
         String path = req.getPath();
         GetObjectRequest getObjectRequest = GetObjectRequest.builder().bucket(bucketName).key(path).build();
-        return s3Client.getObject(getObjectRequest);
+        return s3Client.getObject(getObjectRequest, ResponseTransformer.toBytes()).asInputStream();
+    }
+    
+    public Long getLengthFile(DownloadUrlReq req) {
+        String bucketName = bucketNameMap.getOrDefault(req.getType(), defaultBucket);
+        String path = req.getPath();
+        GetObjectRequest getObjectRequest = GetObjectRequest.builder().bucket(bucketName).key(path).build();
+        return s3Client.getObject(getObjectRequest).response().contentLength();
     }
 }
